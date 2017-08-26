@@ -1,0 +1,52 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}
+    {% if add_assetattacker %}
+        Add AssetAttacker
+    {% else %}
+        Edit AssetAttacker
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+            {% if add_assetattacker %}
+                <h1>Add AssetAttacker</h1>
+            {% else %}
+                <h1>Bewerte {{ asset.name }} {{ attacker.name }}</h1>
+            {% endif %}
+            <br/>
+            {{ wtf.quick_form(form) }}
+            <br/>
+            <h2>Legende</h2>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Value</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>very rare</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>rare</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>oftten</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>very often</td>
+                </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

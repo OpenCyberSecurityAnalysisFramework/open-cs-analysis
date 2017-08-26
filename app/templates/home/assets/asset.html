@@ -1,0 +1,134 @@
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+{% block title %}
+    {% if add_asset %}
+        Add Asset
+    {% else %}
+        Edit Asset
+    {% endif %}
+{% endblock %}
+{% block body %}
+<div class="content-section">
+ <div class="outer">
+    <div class="middle">
+      <div class="inner">
+        <div class="center">
+            {% if add_asset %}
+                <h1>add asset</h1>
+            {% else %}
+                <h1>edit asset</h1>
+            {% endif %}
+            <br/>
+                {{ wtf.quick_form(form) }}
+
+
+            <br/>
+            <h2>criticality and sesitivity impact</h2>
+            <table class="table table-striped table-bordered" >
+                <tr>
+                    <th>value</th>
+                    <th>description</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>vernachlaessigbar</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>gering</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>kritisch, grosse Auswirkung</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>katastrophal, apocaliptic, diabolic, the end</td>
+                </tr>
+            </table>
+
+
+
+                {% if attackers %}
+                  <h1>rating</h1>
+                  <hr class="intro-divider">
+
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th width="15%"> attacker </th>
+                          <!--<th width="40%"> Description </th>-->
+                          <th width="15%"> skill attacker </th>
+                          <th width="15%"> attracktivity attacker </th>
+                          <th width="15%"> description </th>
+                          <th width="15%"> edit </th>
+                          <!--<th width="15%"> Delete </th>-->
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for attacker in attackers %}
+                        <tr>
+                          <td> {{ attacker.name }} </td>
+                          <!--<td> {{ attacker.description }} </td>-->
+                          <td> {{ attacker.wert }} </td>
+                          <td> {{ attacker.myassetattacker.wert }} </td>
+                          <td> {{ attacker.myassetattacker.description }} </td>
+                          <td>
+                              {% if attacker.myassetattacker.id %}
+                            <a href="{{ url_for('home.edit_assetattacker', id=attacker.myassetattacker.id) }}">
+                              <i class="fa fa-pencil"></i> Edit
+                            </a>
+                              {% else %}
+                              bitte Seite neu laden!
+                              {% endif %}
+                          </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+
+                  <div style="text-align: center">
+                {% else %}
+                  <div style="text-align: center">
+                    <!--<h3> No attackers have been added. </h3>-->
+                    <hr class="intro-divider">
+                {% endif %}
+
+
+
+
+            <br/>
+
+
+            {% if add_asset %}
+            {% else %}
+            <h1>expositions matrix</h1>
+                      <!--<table class="table table-striped table-bordered" style="margin-left:auto;margin-right:auto">-->
+            <table class="table table-striped table-bordered" style="margin-left:auto;margin-right:auto">
+                {% for y in range(4, 0, -1) %}
+                <tr style="height:170px">
+                    {% for x in range(1, 5) %}
+
+                        {% if myscores[x-1][y-1] %}
+                            <td style="width:100px;text-align: center;vertical-align: middle; background-color:blue;">
+
+                            </td>
+                        {% else %}
+                            <td style="width:100px;text-align: center;vertical-align: middle;">
+
+                            </td>
+                        {% endif %}
+                        <!--{{ myscores[x-1][y-1] }}-->
+
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+             {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
