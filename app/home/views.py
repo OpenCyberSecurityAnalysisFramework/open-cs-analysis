@@ -1,3 +1,4 @@
+import datetime
 from flask import abort, flash, redirect, render_template, url_for
 from flask_login import current_user, login_required
 
@@ -12,7 +13,7 @@ from flask import abort, render_template
 from flask_login import current_user, login_required
 
 #from app.home.forms import AnalyseForm
-from app.models import Analyse
+from app.models import Analyse, Asset
 from . import home
 
 @home.route('/')
@@ -102,6 +103,8 @@ def edit_analyse(id):
 
     analyse = Analyse.query.get_or_404(id)
     assets = analyse.assets
+    allassets = Asset.query.all()
+
     form = AnalyseForm(obj=analyse)
     if form.validate_on_submit():
         analyse.name = form.name.data
@@ -116,7 +119,7 @@ def edit_analyse(id):
     form.description.data = analyse.description
     form.name.data = analyse.name
     return render_template('home/analyses/analyse.html', add_analyse=add_analyse,
-                           form=form, title="Edit Analyse", assets=assets, analyseid=analyse.id)
+                           form=form, title="Edit Analyse", assets=assets, allassets=allassets, analyseid=analyse.id)
 
 
 @home.route('/analyses/delete/<int:id>', methods=['GET', 'POST'])
@@ -157,6 +160,46 @@ def list_assets():
             asset.analysename = Analyse.query.filter_by(id=asset.analyse_id).first().name
     return render_template('home/assets/assets.html',
                            assets=assets, title='Assets')
+
+@home.route('/assets/clone/<int:id>/<int:cloneassetid>', methods=['GET', 'POST'])
+@login_required
+def clone_asset(id, cloneassetid):
+    analyse = Analyse.query.get_or_404(id)
+    form = AnalyseForm(obj=analyse)
+
+    # clone asset and assign to analyse
+    asset = Asset.query.get_or_404(cloneassetid);
+    newasset = Asset()
+    newasset.name = asset.name + "_CLONED " + datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
+    newasset.analyse_id = id
+    #for a in asset.assetattackers:
+    #    newasset.assetattackers.append(a)
+    newasset.criticality = asset.criticality
+    newasset.sensitivity = asset.sensitivity
+    newasset.description = asset.description
+    newasset.exposition = asset.exposition
+    db.session.add(newasset)
+    #db.session.commit()
+
+    attackers = Attacker.query.all()
+    for attacker in attackers:
+        aa = AssetAttacker.query.filter_by(asset_id=asset.id).filter_by(attacker_id=attacker.id).first()
+        if (aa):
+            mya = AssetAttacker()
+            mya.asset_id=newasset.id
+            mya.attacker_id = attacker.id
+            mya.description = aa.description
+            mya.wert = aa.wert
+            db.session.add(mya)
+            #db.session.commit()
+    db.session.commit()
+
+    # load asset template
+    w, h = 4, 4;
+    myscores = [[0 for x in range(w)] for y in range(h)]
+    # analyse = Analyse.query.get_or_404(id)
+    return render_template('home/assets/asset.html', add_asset=add_asset, myscores=myscores, analyse_id=id,
+                           form=form, title='Add Asset')
 
 
 @home.route('/assets/add/<int:id>', methods=['GET', 'POST'])

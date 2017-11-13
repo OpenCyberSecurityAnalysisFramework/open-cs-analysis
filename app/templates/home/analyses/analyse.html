@@ -73,8 +73,17 @@
           {% if not add_analyse %}
             <a href="{{ url_for('home.add_asset', id=analyseid) }}" class="btn btn-default btn-lg">
             <i class="fa fa-plus"></i>
-            Add Asset
+            add new asset
             </a>
+            <select id="cloneassetid" name="cloneassetid">
+                {% for asset in allassets %}
+                <option value="{{ asset.id }}">{{ asset.name }}</option>
+                {% endfor %}
+            </select>
+            <button id="clonebutton" name="clonebutton" class="btn btn-default btn-lg" theurl="{{ url_for('home.clone_asset', id=analyseid, cloneassetid='0') }}">
+            <i class="fa fa-plus"></i>
+            copy existing asset
+            </button>
           {% endif %}
         </div>
       </div>

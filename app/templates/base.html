@@ -74,5 +74,16 @@
     <!--</footer>-->
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+     <script type="text/javascript">
+        $(document).ready(function()
+        {
+                $('#clonebutton').on('click', function(){
+                    var theurl = $(this).attr('theurl');
+                    var cloneelem = $('#cloneassetid');
+                    var cloneid = cloneelem.val();
+                    window.location.href = theurl.replace('0','') + cloneid;
+                });
+        });
+     </script>
 </body>
 </html>
