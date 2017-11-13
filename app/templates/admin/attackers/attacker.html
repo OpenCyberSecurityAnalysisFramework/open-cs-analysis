@@ -2,9 +2,9 @@
 {% extends "base.html" %}
 {% block title %}
     {% if add_attacker %}
-        Add Attacker
+        add attacker
     {% else %}
-        Edit Attacker
+        edit attacker
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -14,9 +14,9 @@
       <div class="inner">
         <div class="center">
             {% if add_attacker %}
-                <h1>Add Attacker</h1>
+                <h1>add attacker</h1>
             {% else %}
-                <h1>Edit Attacker</h1>
+                <h1>edit attacker</h1>
             {% endif %}
             <br/>
             {{ wtf.quick_form(form) }}

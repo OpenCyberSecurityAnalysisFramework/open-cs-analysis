@@ -2,9 +2,9 @@
 {% extends "base.html" %}
 {% block title %}
     {% if add_asset %}
-        Add Asset
+        add asset
     {% else %}
-        Edit Asset
+        edit asset
     {% endif %}
 {% endblock %}
 {% block body %}
@@ -76,7 +76,7 @@
                   <td>
                       {% if attacker.myassetattacker.id %}
                     <a href="{{ url_for('home.edit_assetattacker', id=attacker.myassetattacker.id) }}">
-                      <i class="fa fa-pencil"></i> Edit
+                      <i class="fa fa-pencil"></i> edit
                     </a>
                       {% else %}
                       bitte Seite neu laden!

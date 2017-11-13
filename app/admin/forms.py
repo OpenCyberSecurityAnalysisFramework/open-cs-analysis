@@ -10,18 +10,18 @@ class DepartmentForm(FlaskForm):
     """
     Form for admin to add or edit a department
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Save')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])
+    submit = SubmitField('save')
 
 
 class RoleForm(FlaskForm):
     """
     Form for admin to add or edit a role
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Save')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])
+    submit = SubmitField('save')
 
 
 class EmployeeAssignForm(FlaskForm):
@@ -32,7 +32,7 @@ class EmployeeAssignForm(FlaskForm):
                                   get_label="name")
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
-    submit = SubmitField('Save')
+    submit = SubmitField('save')
 
 # class AnalyseForm(FlaskForm):
 #     """
@@ -76,12 +76,12 @@ class AttackerForm(FlaskForm):
     """
     Form for admin to add or edit a attacker
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description')
     #wert = StringField('Value Attacker', validators=[DataRequired(),NumberRange(1, 4, '1 - 4')])
-    wert = SelectField(u"Value Attacker", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
+    wert = SelectField(u"value attacker", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
 
-    submit = SubmitField('Save')
+    submit = SubmitField('save')
 
 
 

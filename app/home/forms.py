@@ -10,18 +10,18 @@ class DepartmentForm(FlaskForm):
     """
     Form for admin to add or edit a department
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Save')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])
+    submit = SubmitField('save')
 
 
 class RoleForm(FlaskForm):
     """
     Form for admin to add or edit a role
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description', validators=[DataRequired()])
-    submit = SubmitField('Save')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description', validators=[DataRequired()])
+    submit = SubmitField('save')
 
 
 class EmployeeAssignForm(FlaskForm):
@@ -32,16 +32,16 @@ class EmployeeAssignForm(FlaskForm):
                                   get_label="name")
     role = QuerySelectField(query_factory=lambda: Role.query.all(),
                             get_label="name")
-    submit = SubmitField('Save')
+    submit = SubmitField('save')
 
 class AnalyseForm(FlaskForm):
     """
     Form for admin to add or edit a analyse
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description')
     analyseid = HiddenField()
-    submit = SubmitField('Save')
+    submit = SubmitField('save')
 
 # def get_analyses():
 #     return Analyse.query
@@ -50,13 +50,13 @@ class AssetForm(FlaskForm):
     """
     Form for admin to add or edit a asset
     """
-    name = StringField('Name', validators=[DataRequired()])
-    description = StringField('Description')
+    name = StringField('name', validators=[DataRequired()])
+    description = StringField('description')
     #sensitivity = IntegerField('Sensitivity', validators=[DataRequired(),NumberRange(1, 4, '1 - 4')])
     #criticality = IntegerField('Criticality', validators=[DataRequired(),NumberRange(1, 4, '1 - 4')])
-    sensitivity = SelectField(u"Sensitivity", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
-    criticality = SelectField(u"Criticality", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
-    exposition = HiddenField('Exposition')
+    sensitivity = SelectField(u"sensitivity", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
+    criticality = SelectField(u"criticality", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
+    exposition = HiddenField('exposition')
     #selectedAnalyse = Analyse.query.get(2)
     #analyse_id = IntegerField('Analyse', validators=[DataRequired()])
 
@@ -71,7 +71,7 @@ class AssetForm(FlaskForm):
 
     # analyse_id = HiddenField("Analyse ID")
     #analyse_id = IntegerField("Analyse ID")
-    submit = SubmitField('Save')
+    submit = SubmitField('save')
 
 # class AttackerForm(FlaskForm):
 #     """
@@ -89,7 +89,7 @@ class AssetAttackerForm(FlaskForm):
     """
     Form for admin to add or edit a assetattacker
     """
-    description = StringField('Description')
+    description = StringField('description')
     #s = StringField('Sensitivity')
     #criticality = StringField('Criticality')
     #wert = IntegerField('Attracktivity Attacker', validators=[DataRequired(),NumberRange(1, 4, '1 - 4')])
@@ -104,6 +104,6 @@ class AssetAttackerForm(FlaskForm):
     #filenames = ['1', '2', '3', '4']
     #wert = SelectField(u"Attracktivity Attacker", [Optional()], choices=[(f, f) for f in filenames], default='2')
 
-    wert = SelectField(u"Attracktivity Attacker", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
+    wert = SelectField(u"attracktivity attacker", choices=[('1', '1'), ('2', '2'), ('3', '3'), ('4', '4')])
 
-    submit = SubmitField('Save')
+    submit = SubmitField('save')
