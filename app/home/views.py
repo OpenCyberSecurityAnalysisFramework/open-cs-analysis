@@ -111,7 +111,7 @@ def edit_analyse(id):
         analyse.description = form.description.data
         db.session.add(analyse)
         db.session.commit()
-        flash('You have successfully edited the analyse.')
+        flash('you have successfully edited the analyse.')
 
         # redirect to the analyses page
         return redirect(url_for('home.list_analyses'))
@@ -330,13 +330,7 @@ def delete_asset(id):
     flash('You have successfully deleted the asset.')
 
     # redirect to the asset page
-    return redirect(url_for('home.list_assets'))
-
-    return render_template(title="Delete Asset")
-
-
-
-
+    return redirect(url_for('home.edit_analyse', id=asset.analyse_id))
 
 
 # Attacker Views
