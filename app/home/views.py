@@ -194,13 +194,11 @@ def clone_asset(id, cloneassetid):
             #db.session.commit()
     db.session.commit()
 
-    # load asset template
-    w, h = 4, 4;
-    myscores = [[0 for x in range(w)] for y in range(h)]
-    # analyse = Analyse.query.get_or_404(id)
-    return render_template('home/assets/asset.html', add_asset=add_asset, myscores=myscores, analyse_id=id,
-                           form=form, title='Add Asset')
-
+    add_analyse = False
+    assets = analyse.assets
+    allassets = Asset.query.all()
+    return render_template('home/analyses/analyse.html', add_analyse=add_analyse,
+                           form=form, title="Edit Analyse", assets=assets, allassets=allassets, analyseid=id)
 
 @home.route('/assets/add/<int:id>', methods=['GET', 'POST'])
 @login_required
