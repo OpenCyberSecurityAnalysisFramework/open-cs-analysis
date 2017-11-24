@@ -273,17 +273,18 @@ def edit_asset(id):
         asset.criticality = form.criticality.data
         asset.sensitivity = form.sensitivity.data
         myexpsum = 0.0
+        myexparr = [0,0,0,0]
         for attacker in attackers:
             myassetattacker = AssetAttacker.query.filter_by(asset_id=id).filter_by(
                 attacker_id=attacker.id).first()
-            #myexps.append(myassetattacker.wert)
-            #if not (attacker.myassetattacker):
-            # WU * A * Skill : 4
-            risk = (myassetattacker.wert * attacker.wert) # / 4
-            wu = max(form.criticality.data, form.sensitivity.data)
-            myexpsum += (int(wu) * risk) / 4
 
-        asset.exposition =  myexpsum / len(attackers)
+            myexparr[attacker.wert-1] = max(myexparr[attacker.wert-1], myassetattacker.wert)
+
+        risk = myexparr[0] + myexparr[1]*2 + myexparr[2]*3 + myexparr[3]*4
+        wu = max(form.criticality.data, form.sensitivity.data)
+        myexpsum = (int(wu) * risk)
+
+        asset.exposition =  myexpsum / 10.0
         db.session.add(asset)
         db.session.commit()
         flash('You have successfully edited the asset.')
