@@ -54,7 +54,7 @@ def list_analyses():
     """
     List all analyses
     """
-    analyses = Analyse.query.filter(id>1)
+    analyses = Analyse.query.filter(Analyse.id > 1)
     return render_template('home/analyses/analyses.html',
                            analyses=analyses, title='Analyses')
 
@@ -114,7 +114,7 @@ def edit_analyse(id):
 
     analyse = Analyse.query.get_or_404(id)
     assets = analyse.assets
-    allassets = Analyse.query.get_or_404(1).assets.query.all()
+    allassets = Analyse.query.get_or_404(1).assets.all()
 
     form = AnalyseForm(obj=analyse)
     if form.validate_on_submit():
