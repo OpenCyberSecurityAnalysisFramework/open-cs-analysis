@@ -35,6 +35,7 @@
                     {% else %}
                       <li><a href="{{ url_for('home.dashboard') }}">dashboard</a></li>
                     {% endif %}
+                    <li><a href="{{ url_for('home.list_analyses_default') }}">template</a></li>
                     <li><a href="{{ url_for('home.list_analyses') }}">analysis</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">logout</a></li>
                     <li><a><i class="fa fa-user"></i>  Hi, {{ current_user.username }}!</a></li>

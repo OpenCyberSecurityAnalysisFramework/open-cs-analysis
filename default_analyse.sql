@@ -1,0 +1,1 @@
+insert into analyses(id,name,description) values(1,'template','default analyse');

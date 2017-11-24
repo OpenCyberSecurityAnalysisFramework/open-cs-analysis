@@ -54,7 +54,18 @@ def list_analyses():
     """
     List all analyses
     """
-    analyses = Analyse.query.all()
+    analyses = Analyse.query.filter(id>1)
+    return render_template('home/analyses/analyses.html',
+                           analyses=analyses, title='Analyses')
+
+@home.route('/analyses_default')
+@login_required
+def list_analyses_default():
+    #check_admin
+    """
+    List all analyses
+    """
+    analyses = Analyse.query.filter_by(id=1)
     return render_template('home/analyses/analyses.html',
                            analyses=analyses, title='Analyses')
 
@@ -103,7 +114,7 @@ def edit_analyse(id):
 
     analyse = Analyse.query.get_or_404(id)
     assets = analyse.assets
-    allassets = Asset.query.all()
+    allassets = Analyse.query.get_or_404(1).assets.query.all()
 
     form = AnalyseForm(obj=analyse)
     if form.validate_on_submit():
@@ -482,7 +493,7 @@ def edit_assetattacker(id):
         assetattacker.wert = form.wert.data
         db.session.add(assetattacker)
         db.session.commit()
-        flash('You have successfully edited the assetattacker.')
+        #flash('You have successfully edited the assetattacker.')
 
         # redirect to the attacker page
         asset = Asset.query.get(assetattacker.asset_id)
