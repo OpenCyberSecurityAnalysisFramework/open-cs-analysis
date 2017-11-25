@@ -287,7 +287,7 @@ def edit_asset(id):
         asset.exposition =  myexpsum / 10.0
         db.session.add(asset)
         db.session.commit()
-        flash('You have successfully edited the asset.')
+        #flash('You have successfully edited the asset.')
 
         # redirect to the asset page
         #return redirect(url_for('home.list_assets'))
